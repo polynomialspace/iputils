@@ -249,7 +249,7 @@ main(int argc, char **argv)
 		hints.ai_family = AF_INET6;
 
 	/* Parse command line options */
-	while ((ch = getopt(argc, argv, "h?" "4bRT:" "6F:N:" "aABc:dDfi:I:l:Lm:M:nOp:qQ:rs:S:t:UvVw:W:")) != EOF) {
+	while ((ch = getopt(argc, argv, "h?" "4bRT:" "6F:N:" "aABc:dDfi:I:l:Lm:M:noOp:qQ:rs:S:t:UvVw:W:")) != EOF) {
 		switch(ch) {
 		/* IPv4 specific options */
 		case '4':
@@ -384,6 +384,9 @@ main(int argc, char **argv)
 			break;
 		case 'n':
 			options |= F_NUMERIC;
+			break;
+		case 'o':
+			onceonly = 1;
 			break;
 		case 'O':
 			options |= F_OUTSTANDING;

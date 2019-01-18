@@ -48,6 +48,7 @@ uint16_t acked;
 unsigned char outpack[MAXPACKET];
 struct rcvd_table rcvd_tbl;
 
+long onceonly;
 /* counters */
 long npackets;			/* max packets to transmit */
 long nreceived;			/* # of packets we got back */
@@ -122,6 +123,7 @@ void usage(void)
 		"  -m <mark>          tag the packets going out\n"
 		"  -M <pmtud opt>     define mtu discovery, can be one of <do|dont|want>\n"
 		"  -n                 no dns name resolution\n"
+		"  -o                 exit success after first reply\n"
 		"  -O                 report outstanding replies\n"
 		"  -p <pattern>       contents of padding byte\n"
 		"  -q                 quiet output\n"
@@ -651,6 +653,8 @@ void main_loop(ping_func_set_st *fset, socket_st *sock, uint8_t *packet, int pac
 		if (exiting)
 			break;
 		if (npackets && nreceived + nerrors >= npackets)
+			break;
+		if (onceonly && nreceived >= onceonly)
 			break;
 		if (deadline && nerrors)
 			break;

@@ -158,6 +158,8 @@ extern int ident;			/* process id to identify our packets */
 extern int sndbuf;
 extern int ttl;
 
+extern long onceonly;
+
 extern long npackets;			/* max packets to transmit */
 extern long nreceived;			/* # of packets we got back */
 extern long nrepeats;			/* number of duplicates */
